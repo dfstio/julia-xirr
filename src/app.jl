@@ -29,6 +29,7 @@ function launchServer(port)
 
 
 form = """
+<h1> Please enter lease parameters </h1>
 <form action="/" method="POST" enctype="multipart/form-data">
   <input type="number" name="price" value="" placeholder="What's the price?" />
   <input type="number" name="deposit" value="" placeholder="What's the deposit?" />
@@ -57,8 +58,18 @@ route("/", method = POST) do
   firstcf = deposit - price
   cf = [firstcf,10,10,10,10,10,10,10,10,10,10,10,400]	
   result = xirr(cf,dates)	
-  "XIRR for price $(price) and deposit $(deposit) is $(result)"
-  html(form)
+  msg = "XIRR for price $(price) and deposit $(deposit) is $(result)"
+  
+ newform = """
+<h1> $(vars(:msg)) </h1>
+<form action="/" method="POST" enctype="multipart/form-data">
+  <input type="number" name="price" value="" placeholder="What's the price?" />
+  <input type="number" name="deposit" value="" placeholder="What's the deposit?" />
+  <input type="submit" value="Calculate XIRR" />
+</form>
+""" 
+
+  html(newform)
 end
 
     Genie.AppServer.startup()
