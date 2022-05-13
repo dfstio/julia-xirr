@@ -47,7 +47,7 @@ route("/") do
 end
 
 route("/", method = POST) do
-  price = postpayload(key::price)
+  price = postpayload(:price)
   cf = [0-price,10,10,10,10,10,10,10,10,10,10,10,400]	
   result = xirr(cf,dates)	
   "XIRR for price $(price) is $(result)"
