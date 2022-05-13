@@ -16,7 +16,7 @@ function xirr(cf,dates)
 end
 
 dates = Date(2022,01,01):Month(1):Date(2023,01,01)
-cf = [-500,10,10,10,10,10,10,10,10,10,10,10,400]
+
 
 
 function launchServer(port)
@@ -47,8 +47,10 @@ route("/") do
 end
 
 route("/", method = POST) do
+  cf = [0-price,10,10,10,10,10,10,10,10,10,10,10,400]	
   result = xirr(cf,dates)	
   "XIRR for price $(postpayload(:price, "test")) is $(result)"
+   html(form)
 end
 
     Genie.AppServer.startup()
