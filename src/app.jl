@@ -48,9 +48,11 @@ end
 
 route("/", method = POST) do
   price = postpayload(:price)
-  cf = [0-price,10,10,10,10,10,10,10,10,10,10,10,400]	
+  deposit = postpayload(:price)
+  firstcf = deposit-price
+  cf = [firstcf,10,10,10,10,10,10,10,10,10,10,10,400]	
   result = xirr(cf,dates)	
-  "XIRR for price $(price) is $(result)"
+  "XIRR for price $(price) and $(deposit) is $(result)"
    html(form)
 end
 
