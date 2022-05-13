@@ -28,12 +28,6 @@ function launchServer(port)
     println("port set to $(port)")
 
 
-"""
-    route("/") do
-        "Hi there !!!"
-    end
-"""
-
 form = """
 <form action="/" method="POST" enctype="multipart/form-data">
   <input type="number" name="price" value="" placeholder="What's the price?" />
@@ -52,7 +46,7 @@ route("/xirr", method = POST) do
 end
 
 route("/", method = POST) do
-  price = convert(Int64, postpayload(:price))
+  price = parse(Int64, postpayload(:price))
   deposit = postpayload(:price)
   firstcf = price
   cf = [-500,10,10,10,10,10,10,10,10,10,10,10,price]	
