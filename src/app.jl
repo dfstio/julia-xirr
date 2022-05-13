@@ -36,7 +36,7 @@ function launchServer(port)
 
 form = """
 <form action="/" method="POST" enctype="multipart/form-data">
-  <input type="text" name="Equipment price" value="" placeholder="What's the price?" />
+  <input type="text" name="price" value="" placeholder="What's the price?" />
   <input type="submit" value="Calculate XIRR" />
 </form>
 """
@@ -46,7 +46,7 @@ route("/") do
 end
 
 route("/", method = POST) do
-  "XIRR is $(postpayload(:name, "Gene"))"
+  "XIRR is $(postpayload(:price, "test", :result))"
 end
 
     Genie.AppServer.startup()
