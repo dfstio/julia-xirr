@@ -27,9 +27,27 @@ function launchServer(port)
 
     println("port set to $(port)")
 
+
+"""
     route("/") do
         "Hi there !!!"
     end
+"""
+
+form = """
+<form action="/" method="POST" enctype="multipart/form-data">
+  <input type="text" name="name" value="" placeholder="What's your name?" />
+  <input type="submit" value="Greet" />
+</form>
+"""
+
+route("/") do
+  html(form)
+end
+
+route("/", method = POST) do
+  "Hello $(postpayload(:name, "Gene"))"
+end
 
     Genie.AppServer.startup()
 end
