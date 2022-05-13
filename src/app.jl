@@ -48,7 +48,7 @@ end
 
 route("/xirr", method = POST) do
   message = jsonpayload()
-  (:xirr => (message["price"]) |> json
+  (:xirr => message["price"]) |> json
 end
 
 route("/", method = POST) do
