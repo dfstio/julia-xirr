@@ -1,7 +1,7 @@
 using Genie
 using Genie.Router, Genie.Renderer.Html, Genie.Requests
-
 using Optim, Dates, DayCounts
+
 function cf_freq(dates)
     map(d -> DayCounts.yearfrac(dates[1],d,DayCounts.Actual365Fixed()),dates)
 end
@@ -17,7 +17,7 @@ end
 
 dates = Date(2022,01,01):Month(1):Date(2023,01,01)
 cf = [-500,10,10,10,10,10,10,10,10,10,10,10,400]
-result = xirr(cf,dates)
+
 
 function launchServer(port)
 
@@ -47,6 +47,7 @@ route("/") do
 end
 
 route("/", method = POST) do
+  result = xirr(cf,dates)	
   "XIRR for price $(postpayload(:price, "test")) is $(result)"
 end
 
