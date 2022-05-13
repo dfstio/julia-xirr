@@ -47,12 +47,11 @@ end
 
 route("/", method = POST) do
   price = parse(Int64, postpayload(:price))
-  deposit = postpayload(:price)
-  firstcf = price
-  cf = [-500,10,10,10,10,10,10,10,10,10,10,10,price]	
+  deposit = parse(Int64, postpayload(:deposit))
+  firstcf = deposit - price
+  cf = [firstcf,10,10,10,10,10,10,10,10,10,10,10,400]	
   result = xirr(cf,dates)	
-  "XIRR for price $(price) and $(deposit) is $(result)"
-   html(form)
+  "XIRR for price $(price) and deposit $(deposit) is $(result)"
 end
 
     Genie.AppServer.startup()
