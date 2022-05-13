@@ -52,7 +52,7 @@ route("/xirr", method = POST) do
 end
 
 route("/", method = POST) do
-  price = postpayload(:price)
+  price = convert(Int64, postpayload(:price))
   deposit = postpayload(:price)
   firstcf = price
   cf = [-500,10,10,10,10,10,10,10,10,10,10,10,price]	
