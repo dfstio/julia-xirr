@@ -1,5 +1,5 @@
 using Genie
-using Genie.Router
+using Genie.Router, Genie.Renderer.Html, Genie.Requests
 
 using Optim, Dates, DayCounts
 function cf_freq(dates)
@@ -36,8 +36,8 @@ function launchServer(port)
 
 form = """
 <form action="/" method="POST" enctype="multipart/form-data">
-  <input type="text" name="name" value="" placeholder="What's your name?" />
-  <input type="submit" value="Greet" />
+  <input type="text" name="Equipment price" value="" placeholder="What's the price?" />
+  <input type="submit" value="Calculate XIRR" />
 </form>
 """
 
@@ -46,7 +46,7 @@ route("/") do
 end
 
 route("/", method = POST) do
-  "Hello $(postpayload(:name, "Gene"))"
+  "XIRR is $(postpayload(:name, "Gene"))"
 end
 
     Genie.AppServer.startup()
