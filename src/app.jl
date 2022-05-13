@@ -27,9 +27,11 @@ function launchServer(port)
 
     println("port set to $(port)")
 
+message = "Please enter lease parameters"
 
 form = """
 <form action="/" method="POST" enctype="multipart/form-data">
+  <label $(message)/>
   <input type="number" name="price" value="" placeholder="What's the price?" />
   <input type="number" name="deposit" value="" placeholder="What's the deposit?" />
   <input type="submit" value="Calculate XIRR" />
@@ -41,8 +43,8 @@ route("/") do
 end
 
 route("/xirr", method = POST) do
-  message = jsonpayload()
-  (:xirr => message["price"]) |> json
+  params = jsonpayload()
+  (:xirr => params["price"]) |> json
 end
 
 route("/", method = POST) do
@@ -51,7 +53,8 @@ route("/", method = POST) do
   firstcf = deposit - price
   cf = [firstcf,10,10,10,10,10,10,10,10,10,10,10,400]	
   result = xirr(cf,dates)	
-  "XIRR for price $(price) and deposit $(deposit) is $(result)"
+  message = "XIRR for price $(price) and deposit $(deposit) is $(result)"
+  html(form)
 end
 
     Genie.AppServer.startup()
