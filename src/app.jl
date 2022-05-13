@@ -46,11 +46,16 @@ route("/") do
   html(form)
 end
 
+route("/xirr", method = POST) do
+  message = jsonpayload()
+  (:xirr => (message["price"]) |> json
+end
+
 route("/", method = POST) do
   price = postpayload(:price)
   deposit = postpayload(:price)
-  firstcf = deposit-price
-  cf = [firstcf,10,10,10,10,10,10,10,10,10,10,10,400]	
+  firstcf = price
+  cf = [500,10,10,10,10,10,10,10,10,10,10,10,price]	
   result = xirr(cf,dates)	
   "XIRR for price $(price) and $(deposit) is $(result)"
    html(form)
