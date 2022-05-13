@@ -27,12 +27,9 @@ function launchServer(port)
 
     println("port set to $(port)")
 
-message = "Please enter lease parameters"
 
 form = """
 <form action="/" method="POST" enctype="multipart/form-data">
-  <label Please enter lease parameters/>
-  <label $(message)/>
   <input type="number" name="price" value="" placeholder="What's the price?" />
   <input type="number" name="deposit" value="" placeholder="What's the deposit?" />
   <input type="submit" value="Calculate XIRR" />
@@ -45,7 +42,13 @@ end
 
 route("/xirr", method = POST) do
   params = jsonpayload()
-  (:xirr => params["price"]) |> json
+  price = parse(Int64, params["price"])
+  deposit = parse(Int64, params["deposit"])
+  firstcf = deposit - price
+  cf = [firstcf,10,10,10,10,10,10,10,10,10,10,10,400]	
+  result = xirr(cf,dates)	
+
+  (:xirr => result) |> json
 end
 
 route("/", method = POST) do
@@ -54,7 +57,7 @@ route("/", method = POST) do
   firstcf = deposit - price
   cf = [firstcf,10,10,10,10,10,10,10,10,10,10,10,400]	
   result = xirr(cf,dates)	
-  message = "XIRR for price $(price) and deposit $(deposit) is $(result)"
+  "XIRR for price $(price) and deposit $(deposit) is $(result)"
   html(form)
 end
 
