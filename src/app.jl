@@ -10,8 +10,10 @@ function xnpv(xirr,cf,interval)
 end
 function xirr(cf,dates)
     interval = cf_freq(dates)
+#    println("interval is $(interval)")
     f(x) = xnpv(x,cf,interval)
     result = optimize(x -> f(x)^2,0.0,1.0,Brent())
+    println("optimize result is $(result)")
     return result.minimizer
 end
 
@@ -47,7 +49,10 @@ route("/xirr", method = POST) do
   deposit = parse(Int64, params["deposit"])
   firstcf = deposit - price
   cf = [firstcf,10,10,10,10,10,10,10,10,10,10,10,400]	
-  result = xirr(cf,dates)	
+  result = xirr(cf,dates)	  
+  msg = "XIRR for price $(price) and deposit $(deposit) is $(result)"
+  println("$(msg)")
+#  println("cf are $(cf)")
 
   (:xirr => result) |> json
 end
