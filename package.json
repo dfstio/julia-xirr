@@ -1,7 +1,7 @@
 {
   "name": "julia-xirr",
   "version": "1.0.0",
-  "description": "julia xirr",
+  "description": "Julia XIRR calculation - website and POST JSON API",
   "main": "index.js",
   "repository": "https://github.com/Benjamin-Herald/julia-xirr",
   "author": "Benjamin Herald",
