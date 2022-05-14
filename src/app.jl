@@ -66,7 +66,7 @@ route("/", method = POST) do
   msg = "XIRR for price $(price) and deposit $(deposit) is $(result)"
   
  newform = """
-<h2>$(msg)</h2>
+<h4>$(msg)</h4>
 <form action="/" method="POST" enctype="multipart/form-data">
   <input type="number" name="price" value=$(price) placeholder="What's the price?" />
   <input type="number" name="deposit" value=$(deposit) placeholder="What's the deposit?" />
