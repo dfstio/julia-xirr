@@ -14,7 +14,8 @@ function xirr(cf,dates)
     f(x) = xnpv(x,cf,interval)
     result = optimize(x -> f(x)^2,0.0,1.0,Brent())
     println("optimize result is $(result)")
-    return result.minimizer
+#    return result.minimizer
+    return result
 end
 
 dates = Date(2022,01,01):Month(1):Date(2023,01,01)
@@ -55,23 +56,27 @@ route("/xirr", method = POST) do
   params = jsonpayload()
   price = parse(Int64, params["price"])
   deposit = parse(Int64, params["deposit"])
+  start = time_ns();
   firstcf = deposit - price
   cf = [firstcf,10,10,10,10,10,10,10,10,10,10,10,400]	
   result = xirr(cf,dates)	  
-  msg = "XIRR for price $(price) and deposit $(deposit) is $(result)"
+  duration = (time_ns() - start) / 1000000
+  msg = "XIRR for price $(price) and deposit $(deposit) is $(result.minimizer)"
   println("$(msg)")
 #  println("cf are $(cf)")
 
-  (:xirr => result) |> json
+  (:xirr => result.minimizer, :duration_ms => duration , :log => result ) |> json
 end
 
 route("/", method = POST) do
   price = parse(Int64, postpayload(:price))
   deposit = parse(Int64, postpayload(:deposit))
+  start = time_ns();
   firstcf = deposit - price
   cf = [firstcf,10,10,10,10,10,10,10,10,10,10,10,400]	
-  result = xirr(cf,dates)	
-  msg = "XIRR for price $(price) and deposit $(deposit) is $(result)"
+  result = xirr(cf,dates)
+  duration = (time_ns() - start) / 1000000	
+  msg = "XIRR for price $(price) and deposit $(deposit) is $(result.minimizer), calculated in $(duration) ms"
   
  newform = """
 <h3>$(msg)</h3>
@@ -87,6 +92,7 @@ route("/", method = POST) do
    <div>
   <input type="submit" value="Calculate new XIRR" />
   </div>
+    $(result)
 </form>
 """ 
 
