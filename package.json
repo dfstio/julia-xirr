@@ -7,11 +7,14 @@
   "author": "Benjamin Herald",
   "license": "MIT",
   "private": true,
-   "scripts": {       
-	  "logs": "heroku logs --tail",
-	  "push": "git push heroku master",
-	  "build": "yarn push && yarn logs",
-	  "commit": "git commit -a -S -m",
-	  "local": "heroku local"  
-   }
+  "scripts": {
+    "logs": "heroku logs --tail",
+    "push": "git push heroku master",
+    "build": "yarn push && yarn logs",
+    "commit": "git commit -a -S -m",
+    "local": "heroku local",
+    "addgithub": "git remote add github https://github.com/Benjamin-Herald/julia-xirr.git",
+    "pushgithub": "git push -u github master"
+  },
+  "dependencies": {}
 }

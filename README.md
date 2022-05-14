@@ -11,9 +11,9 @@ https://devcenter2.assets.heroku.com/articles/heroku-local
 
 
 ## Julia from scratch
-$ mkdir genie_test
-$ cd genie_test
-$ julia ]
-pkg> activate .
-pkg> add Genie
-julia> using Genie
+
+	$ mkdir genie_test
+	$ cd genie_test
+	$ julia ]
+	pkg> activate .
+	pkg> add Genie
