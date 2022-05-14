@@ -31,7 +31,7 @@ function launchServer(port)
 
 
 form = """
-<h1> Please enter lease parameters </h1>
+<h4> Please enter lease parameters </h4>
 <form action="/" method="POST" enctype="multipart/form-data">
   <input type="number" name="price" value=500 placeholder="What's the price?" />
   <input type="number" name="deposit" value=100 placeholder="What's the deposit?" />
