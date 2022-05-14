@@ -31,11 +31,19 @@ function launchServer(port)
 
 
 form = """
-<h4> Please enter lease parameters </h4>
+<h3> Please enter lease parameters </h3>
 <form action="/" method="POST" enctype="multipart/form-data">
+  <div>
+  <label for="price">Price</label>
   <input type="number" name="price" value=500 placeholder="What's the price?" />
+  </div>
+  <div>
+  <label for="deposit">Deposit</label>
   <input type="number" name="deposit" value=100 placeholder="What's the deposit?" />
+   </div>
+   <div>
   <input type="submit" value="Calculate XIRR" />
+  </div>
 </form>
 """
 
@@ -66,11 +74,19 @@ route("/", method = POST) do
   msg = "XIRR for price $(price) and deposit $(deposit) is $(result)"
   
  newform = """
-<h4>$(msg)</h4>
+<h3>$(msg)</h3>
 <form action="/" method="POST" enctype="multipart/form-data">
+  <div>
+  <label for="price">Price</label>
   <input type="number" name="price" value=$(price) placeholder="What's the price?" />
+  </div>
+  <div>
+  <label for="deposit">Deposit</label>
   <input type="number" name="deposit" value=$(deposit) placeholder="What's the deposit?" />
+   </div>
+   <div>
   <input type="submit" value="Calculate new XIRR" />
+  </div>
 </form>
 """ 
 
