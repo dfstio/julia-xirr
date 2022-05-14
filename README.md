@@ -1,5 +1,5 @@
 # Julia XIRR
-list and zero knowledge proofs of inclusion and exclusion
+Calculating XIRR with Julia on web and with POST API on heroku server
 
 ## Links
 
