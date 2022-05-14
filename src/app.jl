@@ -13,7 +13,7 @@ function xirr(cf,dates)
 #    println("interval is $(interval)")
     f(x) = xnpv(x,cf,interval)
     result = optimize(x -> f(x)^2,0.0,1.0,Brent())
-    println("optimize result is $(result)")
+#    println("optimize result is $(result)")
 #    return result.minimizer
     return result
 end
